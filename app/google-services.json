@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "49160573103",
+    "project_id": "helpcat-413413",
+    "storage_bucket": "helpcat-413413.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:49160573103:android:0c64af10140b847105845a",
+        "android_client_info": {
+          "package_name": "com.example.cathelp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDWA8cnaK98fgcjgzJpDfArBVL6RWigJQY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
