@@ -17,24 +17,24 @@
         android:theme="@style/Theme.CatHelp"
         tools:targetApi="31">
         <activity
-            android:name=".UI.User.HomeActivity"
+            android:name=".View.User.HomeActivity"
             android:exported="false"
             android:label="@string/title_activity_home"
             android:theme="@style/Theme.CatHelp.NoActionBar" />
         <activity
-            android:name=".UI.Admin.AdminCategoryActivity"
+            android:name=".View.Admin.AdminCategoryActivity"
             android:exported="false" />
         <activity
-            android:name=".UI.Admin.AdminAddNewProductActivity"
+            android:name=".View.Admin.AdminAddNewProductActivity"
             android:exported="false" />
         <activity
-            android:name=".UI.RegisterActivity"
+            android:name=".View.RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".UI.LoginActivity"
+            android:name=".View.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".UI.StartActivity"
+            android:name=".View.StartActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

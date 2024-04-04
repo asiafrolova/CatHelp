@@ -6,10 +6,19 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.User.HomeActivity"
+    tools:context=".View.User.HomeActivity"
     android:background="@color/pink_white">
+    <Toolbar
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
+    </Toolbar>
 
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/frame_layout"/>
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:background="@color/white"
@@ -20,13 +29,16 @@
         app:contentInsetEnd="0dp"
         app:contentInsetStart="0dp"
         app:fabAlignmentMode="center"
-        app:fabCradleDiametr="100dp"
+
         app:fabCradleRoundedCornerRadius="10dp"
         app:fabCradleVerticalOffset="10dp"
-        app:fabAttached="true">
+        >
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navigation"
+            app:itemActiveIndicatorStyle="@style/AppCustomIndicator"
+            app:itemRippleColor="@color/grey_white"
+            app:itemIconTint="@color/grey"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/transparent_backround"
@@ -35,15 +47,43 @@
             app:menu="@menu/bottom_menu"/>
     </com.google.android.material.bottomappbar.BottomAppBar>
 
+
+
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
+        style="@style/PinkFloatButton"
+
+        android:backgroundTint="@color/white"
         android:src="@drawable/add_without_circle"
+
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         app:layout_anchor="@id/bottom_app_bar"
+        app:maxImageSize="40dp"
+        app:tint="@color/pink_very_white"
+        android:elevation="6dp"
+        app:rippleColor="@color/grey_white"
+        android:clickable="true"
+
+
         />
+        <View
+            app:layout_anchorGravity="center"
+            app:layout_anchor="@id/bottom_app_bar"
+            android:id="@+id/view"
+            android:layout_width="60dp"
+            android:layout_height="60dp">
 
+        </View>
 
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/nav_host_fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/nav_graph" />
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

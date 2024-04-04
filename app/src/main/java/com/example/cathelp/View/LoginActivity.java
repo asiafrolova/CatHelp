@@ -1,4 +1,4 @@
-package com.example.cathelp.UI;
+package com.example.cathelp.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,10 +10,10 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.example.cathelp.UI.Admin.AdminAddNewProductActivity;
+import com.example.cathelp.View.Admin.AdminAddNewProductActivity;
 import com.example.cathelp.Models.Users;
 import com.example.cathelp.Prevalent.Prevalent;
-import com.example.cathelp.UI.User.HomeActivity;
+import com.example.cathelp.View.User.HomeActivity;
 import com.example.cathelp.databinding.ActivityLoginBinding;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -94,7 +94,7 @@ public class LoginActivity extends AppCompatActivity {
 
                                 Toast.makeText(LoginActivity.this,"Успешный вход",Toast.LENGTH_SHORT).show();
                                 binding.loadingBar.setVisibility(ProgressBar.GONE);
-                                Intent homeIntent = new Intent(LoginActivity.this, AdminAddNewProductActivity.class);
+                                Intent homeIntent = new Intent(LoginActivity.this, HomeActivity.class);
                                 startActivity(homeIntent);
                             }
 

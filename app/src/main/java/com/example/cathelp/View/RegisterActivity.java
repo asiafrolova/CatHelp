@@ -1,4 +1,4 @@
-package com.example.cathelp.UI;
+package com.example.cathelp.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;

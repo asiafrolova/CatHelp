@@ -1,4 +1,4 @@
-package com.example.cathelp.UI.Admin;
+package com.example.cathelp.View.Admin;
 
 import androidx.appcompat.app.AppCompatActivity;
 

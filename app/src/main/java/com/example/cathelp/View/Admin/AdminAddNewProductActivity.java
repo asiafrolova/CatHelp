@@ -1,4 +1,4 @@
-package com.example.cathelp.UI.Admin;
+package com.example.cathelp.View.Admin;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,16 +13,13 @@ import android.widget.ProgressBar;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import com.example.cathelp.R;
-import com.example.cathelp.UI.LoginActivity;
-import com.example.cathelp.UI.User.HomeActivity;
+import com.example.cathelp.View.User.HomeActivity;
 import com.example.cathelp.databinding.ActivityAdminAddNewProductBinding;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.Firebase;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
