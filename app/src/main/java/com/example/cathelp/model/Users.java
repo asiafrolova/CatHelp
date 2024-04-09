@@ -1,4 +1,4 @@
-package com.example.cathelp.Models;
+package com.example.cathelp.model;
 
 public class Users {
     private String name;

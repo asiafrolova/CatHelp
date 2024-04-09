@@ -3,16 +3,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".View.Fragments.HomeFragment"
     android:background="@color/pink_very_white">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/homeRecycleView"
+        app:spanCount="2"
+        tools:listitem="@layout/events_item"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="Home"
-        android:textColor="@color/white"
-        android:textSize="30dp" />
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        >
+
+    </androidx.recyclerview.widget.RecyclerView>
 
 </FrameLayout>

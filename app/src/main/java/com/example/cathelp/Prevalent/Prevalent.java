@@ -1,6 +1,6 @@
 package com.example.cathelp.Prevalent;
 
-import com.example.cathelp.Models.Users;
+import com.example.cathelp.model.Users;
 
 public class Prevalent {
     public static Users currentUser;

@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.example.cathelp.Models.Users;
+import com.example.cathelp.model.Users;
 import com.example.cathelp.Prevalent.Prevalent;
 import com.example.cathelp.View.User.HomeActivity;
 import com.example.cathelp.View.User.HomeActivity;
