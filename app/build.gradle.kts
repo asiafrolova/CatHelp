@@ -45,6 +45,10 @@ android {
 
 
     dependencies {
+        releaseApi("com.theartofdev.edmodo:android-image-cropper:2.8.0")
+        implementation("com.vanniktech:android-image-cropper:4.5.0")
+
+
         implementation ("com.squareup.retrofit2:retrofit:2.9.0")
         implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
         implementation ("com.squareup.retrofit2:adapter-rxjava3:2.9.0")

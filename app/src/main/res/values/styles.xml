@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <style name="PinkFloatButton" parent="Widget.Material3.ExtendedFloatingActionButton.Icon.Primary">
         <item name="android:colorAccent">@color/pink_very_white</item>
     </style>
     <style name="AppCustomIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
         <item name="android:color">@color/pink_very_white</item>
+    </style>
+    <style name="SplashScreen" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash</item>
+
     </style>
 </resources>

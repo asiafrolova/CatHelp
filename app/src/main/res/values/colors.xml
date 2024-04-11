@@ -12,5 +12,9 @@
     <color name="blue">#009688</color>
     <color name="blue_white">#59B3AA</color>
     <color name="blue_dark">#01574F</color>
+    <color name="yellow_dark">#857C00</color>
+    <color name="yellow">#FFED00</color>
+    <color name="yellow_white">#FFF352</color>
+    <color name="yellow_ver_white">#FFF897</color>
 
 </resources>
