@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.rey.material.widget.LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    android:orientation="vertical"
+    android:background="@color/white"
+    >
+    <com.rey.material.widget.TextView
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:fontFamily="@font/tahoma"
+        android:textSize="20dp"
+        android:text="Name "
+        android:id="@+id/nameTextView"
+        android:layout_marginBottom="10dp"
+        android:textStyle="bold"
+        >
+
+    </com.rey.material.widget.TextView>
+    <com.rey.material.widget.ImageView
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_marginHorizontal="30dp"
+        android:id="@+id/imageEvent"
+        android:layout_marginBottom="10dp">
+
+    </com.rey.material.widget.ImageView>
+    <com.rey.material.widget.TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:id="@+id/addressTextView"
+        android:text="Addres text"
+        android:fontFamily="@font/tahoma"
+        android:textSize="18dp"
+        android:layout_marginBottom="10dp">
+
+    </com.rey.material.widget.TextView>
+    <com.rey.material.widget.TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:id="@+id/infoTextView"
+        android:text="Info text"
+        android:fontFamily="@font/tahoma"
+        android:textSize="18dp"
+        android:layout_marginBottom="10dp">
+
+    </com.rey.material.widget.TextView>
+
+
+</com.rey.material.widget.LinearLayout>

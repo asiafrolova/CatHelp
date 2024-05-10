@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:iconTint="@color/pink"
+        android:iconTint="@color/new_pink"
         android:id="@+id/homeFragment"
 
-        android:icon="@drawable/home"
+        android:icon="@drawable/home_icon"
         android:title=" " />
     <item
         android:title=" "
         android:iconTintMode="add"
 
-        android:iconTint="@color/pink"
+        android:iconTint="@color/new_pink"
         android:id="@+id/mapsFragment"
 
-        android:icon="@drawable/location_on"
+        android:icon="@drawable/gps_icon"
         />
     <item
         android:id="@+id/fab"
@@ -21,17 +21,16 @@
         android:enabled="false"/>
     <item
         android:title=" "
-        android:iconTint="@color/pink"
+        android:iconTint="@color/new_pink"
         android:id="@+id/marksFragment"
 
-        android:icon="@drawable/bookmark"
+        android:icon="@drawable/like_icon"
          />
     <item
         android:title=" "
-        android:iconTint="@color/pink"
+        android:iconTint="@color/new_pink"
         android:id="@+id/accountFragment"
-
-        android:icon="@drawable/account"
+        android:icon="@drawable/acc_icon"
          />
 
 </menu>

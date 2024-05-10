@@ -1,4 +1,11 @@
 buildscript {
+    repositories {
+        google()
+        mavenCentral()
+        maven {
+            url = uri("https://jitpack.io")
+        }
+    }
 
     dependencies {
         classpath("com.google.gms:google-services:4.4.1")
@@ -9,4 +16,5 @@ buildscript {
 plugins {
     id("com.android.application") version "8.3.1" apply false
 }
+
 

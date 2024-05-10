@@ -4,7 +4,9 @@ public class Users {
     private String name;
     private String phone;
     private String password;
+    private String image;
     public Users(){
+
 
     }
 
@@ -12,6 +14,23 @@ public class Users {
         this.name = name;
         this.phone = phone;
         this.password = password;
+
+    }
+    public Users(String name, String phone, String password,String image) {
+        this.name = name;
+        this.phone = phone;
+        this.password = password;
+        this.image = image;
+
+    }
+
+    public String getImage() {
+        return this.image;
+    }
+
+
+    public void setImage(final String image) {
+        this.image = image;
     }
 
     public String getName() {

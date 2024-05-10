@@ -4,108 +4,174 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="font.View.RegisterActivity">
+    android:background="@drawable/gradient_white"
+    tools:context=".view.RegisterActivity">
 
-    <ImageView
+    <com.rey.material.widget.ImageView
         android:id="@+id/app_logo"
-        android:layout_width="250dp"
-        android:layout_height="300dp"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/logo_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:background="@drawable/logo_start"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.2">
 
-    </ImageView>
+    </com.rey.material.widget.ImageView>
 
-    <EditText
+
+    <com.rey.material.widget.EditText
         android:id="@+id/register_username_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginRight="30dp"
+
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginBottom="25dp"
+        android:layout_marginTop="50dp"
+
         android:background="@drawable/input_design"
         android:fontFamily="@font/tahoma"
-        android:hint="Имя пользователя"
+        android:hint="@string/login"
         android:inputType="text"
-        android:padding="10dp"
+        android:paddingStart="35dp"
+        android:paddingVertical="10dp"
         android:textSize="20dp"
-        app:layout_constraintTop_toBottomOf="@+id/app_logo">
+        app:layout_constraintBottom_toTopOf="@id/register_phone_input">
 
-    </EditText>
+    </com.rey.material.widget.EditText>
+    <com.rey.material.widget.ImageView
+        app:layout_constraintTop_toTopOf="@id/register_username_input"
+        app:layout_constraintStart_toStartOf="@id/register_username_input"
+        android:src="@drawable/login_icon"
+        android:layout_marginStart="5dp"
+        app:layout_constraintBottom_toBottomOf="@id/register_username_input"
+        android:layout_width="20dp"
+        android:layout_height="20dp">
 
-    <EditText
+    </com.rey.material.widget.ImageView>
+
+    <com.rey.material.widget.EditText
+
         android:id="@+id/register_phone_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
+        android:layout_marginHorizontal="30dp"
         android:layout_marginTop="10dp"
-        android:layout_marginRight="30dp"
+
         android:background="@drawable/input_design"
         android:fontFamily="@font/tahoma"
-        android:hint="Номер телефона"
-        android:inputType="number"
-        android:padding="10dp"
+        android:hint="@string/e_mail"
+        android:paddingStart="40dp"
+        android:layout_marginBottom="25dp"
+        android:inputType="text"
+
+
+        android:paddingVertical="10dp"
+
         android:textSize="20dp"
-        app:layout_constraintTop_toBottomOf="@+id/register_username_input">
+        app:layout_constraintBottom_toTopOf="@id/PasswordLayout">
 
-    </EditText>
+    </com.rey.material.widget.EditText>
+    <com.rey.material.widget.ImageView
+        app:layout_constraintTop_toTopOf="@id/register_phone_input"
+        app:layout_constraintStart_toStartOf="@id/register_phone_input"
+        android:src="@drawable/email_icon"
+        android:layout_marginStart="7dp"
+        app:layout_constraintBottom_toBottomOf="@id/register_phone_input"
+        android:layout_width="20dp"
+        android:layout_height="20dp">
 
-    <EditText
-        android:id="@+id/register_password_input"
+    </com.rey.material.widget.ImageView>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/PasswordLayout"
         android:layout_width="match_parent"
+
+        app:hintEnabled="false"
+        app:hintTextColor="@color/grey_very_white"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
+        app:passwordToggleEnabled="true"
+        app:layout_constraintBottom_toTopOf="@id/register_btn"
+        android:layout_marginHorizontal="30dp"
         android:layout_marginTop="10dp"
-        android:layout_marginRight="30dp"
-        android:background="@drawable/input_design"
-        android:fontFamily="@font/tahoma"
-        android:hint="Пароль"
-        android:inputType="textPassword"
-        android:padding="10dp"
-        android:textSize="20dp"
-        app:layout_constraintTop_toBottomOf="@+id/register_phone_input">
+        android:layout_marginBottom="30dp"
+        app:endIconDrawable="@drawable/eye_button">
 
-    </EditText>
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/register_password_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/input_design"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:paddingStart="40dp"
+            android:paddingVertical="10dp"
+            android:fontFamily="@font/tahoma"
+            android:textSize="20dp"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
-    <ProgressBar
-        android:visibility="invisible"
-        android:indeterminate="true"
+
+    <com.rey.material.widget.ImageView
+        app:layout_constraintTop_toTopOf="@id/PasswordLayout"
+        app:layout_constraintStart_toStartOf="@id/PasswordLayout"
+        android:src="@drawable/password_icon"
+        android:layout_marginStart="7dp"
+        app:layout_constraintBottom_toBottomOf="@id/PasswordLayout"
+        android:layout_width="20dp"
+        android:layout_height="20dp"/>
+
+    <com.google.android.material.progressindicator.CircularProgressIndicator
 
         android:id="@+id/loadingBar"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:indeterminate="true"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5">
-
-    </ProgressBar>
+        app:layout_constraintVertical_bias="0.5"
 
 
-    <Button
+        app:trackCornerRadius="5dp"
+
+        app:indicatorSize="50dp"
+        app:trackThickness="6dp"
+
+
+        app:trackColor="@color/yellow_ver_white"
+        app:indicatorColor="@color/pink_very_white"
+        app:indicatorDirectionCircular="clockwise"
+        app:indicatorInset="5dp">
+
+    </com.google.android.material.progressindicator.CircularProgressIndicator>
+
+
+    <com.rey.material.widget.Button
+        android:layout_marginHorizontal="30dp"
         android:id="@+id/register_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:layout_marginBottom="30dp"
         android:background="@drawable/button_style"
         android:fontFamily="@font/tahoma"
         android:padding="10dp"
-        android:text="Зарегестрироваться"
+        android:text="@string/register"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent">
 
-    </Button>
+    </com.rey.material.widget.Button>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

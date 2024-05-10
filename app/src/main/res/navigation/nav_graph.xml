@@ -6,7 +6,7 @@
     app:startDestination="@id/accountFragment">
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.cathelp.View.Fragments.HomeFragment"
+        android:name="com.example.cathelp.view.fragments.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -25,29 +25,46 @@
 
     <fragment
         android:id="@+id/accountFragment"
-        android:name="com.example.cathelp.View.Fragments.AccountFragment"
+        android:name="com.example.cathelp.view.fragments.AccountFragment"
         android:label="fragment_account"
-        tools:layout="@layout/fragment_account" />
+        tools:layout="@layout/fragment_account" >
+        <action
+            android:id="@+id/action_accountFragment_to_myEventFragment"
+            app:destination="@id/myEventFragment" />
+    </fragment>
     <fragment
         android:id="@+id/mapsFragment"
-        android:name="com.example.cathelp.View.Fragments.MapsFragment"
+        android:name="com.example.cathelp.view.fragments.MapsFragment"
         android:label="fragment_maps"
         tools:layout="@layout/fragment_maps" />
     <fragment
         android:id="@+id/marksFragment"
-        android:name="com.example.cathelp.View.Fragments.MarksFragment"
+        android:name="com.example.cathelp.view.fragments.MarksFragment"
         android:label="fragment_marks"
-        tools:layout="@layout/fragment_marks" />
+        tools:layout="@layout/fragment_marks" >
+        <action
+            android:id="@+id/action_marksFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
     <activity
         android:id="@+id/adminAddNewProductActivity"
-        android:name="com.example.cathelp.View.Admin.AdminAddNewProductActivity"
+        android:name="com.example.cathelp.view.AddNewProductActivity"
         android:label="AdminAddNewProductActivity" />
 
     <fragment
         android:id="@+id/detailFragment"
-        android:name="com.example.cathelp.View.Fragments.DetailFragment"
+        android:name="com.example.cathelp.view.fragments.DetailFragment"
         android:label="fragment_detail"
         tools:layout="@layout/fragment_detail" >
 
+    </fragment>
+    <fragment
+        android:id="@+id/myEventFragment"
+        android:name="com.example.cathelp.view.fragments.MyEventFragment"
+        android:label="fragment_my_event"
+        tools:layout="@layout/fragment_my_event" >
+        <action
+            android:id="@+id/action_myEventFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
     </fragment>
 </navigation>

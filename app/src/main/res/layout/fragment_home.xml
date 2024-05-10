@@ -1,22 +1,190 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".View.Fragments.HomeFragment"
-    android:background="@color/pink_very_white">
 
-    <!-- TODO: Update blank fragment layout -->
+    tools:context=".view.fragments.HomeFragment"
+    android:background="@drawable/gradient">
+
+
+
+    <ScrollView
+        app:layout_constraintTop_toBottomOf="@id/linearLayout"
+        android:id="@+id/scrollViewHome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <com.google.android.material.appbar.MaterialToolbar
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:theme="@style/MyActionBar"
+                android:id="@+id/toolbarSearch"
+                app:menu="@menu/options_menu"
+                app:title="@string/home"
+
+
+
+
+
+                />
+            <HorizontalScrollView
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@id/toolbarSearch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/linearLayout">
+
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    app:layout_constraintTop_toBottomOf="@+id/toolbarSearch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:orientation="horizontal"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_marginTop="10dp">
+                    <androidx.constraintlayout.utils.widget.ImageFilterButton
+
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:id="@+id/filter_dog"
+                        android:src="@drawable/dog"
+                        android:background="@drawable/view_card"
+
+                        android:layout_marginHorizontal="7dp"
+
+                        >
+
+                    </androidx.constraintlayout.utils.widget.ImageFilterButton>
+                    <androidx.constraintlayout.utils.widget.ImageFilterButton
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:id="@+id/filter_cat"
+                        android:src="@drawable/cat"
+                        android:layout_marginHorizontal="7dp"
+
+                        android:background="@drawable/view_card"
+
+
+                        >
+
+                    </androidx.constraintlayout.utils.widget.ImageFilterButton>
+                    <androidx.constraintlayout.utils.widget.ImageFilterButton
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:id="@+id/filter_fish"
+                        android:src="@drawable/fish"
+                        android:layout_marginHorizontal="7dp"
+                        android:background="@drawable/view_card"
+
+
+                        >
+
+                    </androidx.constraintlayout.utils.widget.ImageFilterButton>
+                    <androidx.constraintlayout.utils.widget.ImageFilterButton
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:id="@+id/filter_parrot"
+                        android:src="@drawable/parrot"
+                        android:layout_marginHorizontal="7dp"
+                        android:background="@drawable/view_card"
+
+
+                        >
+
+                    </androidx.constraintlayout.utils.widget.ImageFilterButton>
+                    <androidx.constraintlayout.utils.widget.ImageFilterButton
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:id="@+id/filter_salamand"
+                        android:src="@drawable/salamand"
+                        android:layout_marginHorizontal="7dp"
+                        android:background="@drawable/view_card"
+
+
+                        >
+
+                    </androidx.constraintlayout.utils.widget.ImageFilterButton>
+
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+            </HorizontalScrollView>
+
+
+
+
+
+
     <androidx.recyclerview.widget.RecyclerView
+
         android:id="@+id/homeRecycleView"
         app:spanCount="2"
+        tools:itemCount="6"
         tools:listitem="@layout/events_item"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="70dp"
+
+
+
         >
 
     </androidx.recyclerview.widget.RecyclerView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+    <com.google.android.material.progressindicator.CircularProgressIndicator
 
-</FrameLayout>
+        android:id="@+id/loadingBarHome"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:indeterminate="true"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5"
+
+
+        app:trackCornerRadius="5dp"
+
+        app:indicatorSize="50dp"
+        app:trackThickness="6dp"
+
+
+        app:trackColor="@color/yellow_ver_white"
+        app:indicatorColor="@color/pink_very_white"
+        app:indicatorDirectionCircular="clockwise"
+        app:indicatorInset="5dp">
+
+    </com.google.android.material.progressindicator.CircularProgressIndicator>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:visibility="gone"
+        android:id="@+id/toTopFab"
+        android:backgroundTint="@color/white"
+        android:src="@drawable/top_icon"
+        app:tint="@color/black"
+        android:foregroundGravity="center"
+        app:rippleColor="@color/grey_white"
+        android:clickable="true"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_margin="20dp">
+
+    </com.google.android.material.floatingactionbutton.FloatingActionButton>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,6 +6,7 @@
     <color name="grey_white">#AEACAC</color>
     <color name="grey_very_white">#D1CDCD</color>
     <color name="pink">#F26B61</color>
+    <color name="new_pink">#DE94C0</color>
     <color name="pink_white">#D37F79</color>
     <color name="pink_very_white">#EFBBB7</color>
     <color name="pink_dark">#803833</color>
@@ -13,8 +14,11 @@
     <color name="blue_white">#59B3AA</color>
     <color name="blue_dark">#01574F</color>
     <color name="yellow_dark">#857C00</color>
-    <color name="yellow">#FFED00</color>
+    <color name="yellow">#EBCC2C</color>
+    <color name="new_yellow">#FFA426</color>
     <color name="yellow_white">#FFF352</color>
     <color name="yellow_ver_white">#FFF897</color>
+    <color name="lemon">#EED65A</color>
+    <color name="fuschia">#A92E9F</color>
 
 </resources>

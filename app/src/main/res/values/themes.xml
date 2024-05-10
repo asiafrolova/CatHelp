@@ -1,18 +1,47 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.CatHelp" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="android:statusBarColor">@color/white</item>
+        <item name="android:statusBarColor">@color/new_pink</item>
         <item name="colorPrimary">@color/white</item>
+        <item name="android:actionBarPopupTheme">@style/MyActionBar</item>
+        <item name="android:actionBarStyle">@style/MyActionBar</item>
+
+    </style>
+    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
+        <!-- Set the splash screen background to black -->
+        <!-- Use windowSplashScreenAnimatedIcon to add a drawable or an animated
+             drawable. -->
+        <item name="windowSplashScreenAnimatedIcon">@drawable/splash</item>
+        <!-- Set the theme of the Activity that follows your splash screen. -->
+        <item name="postSplashScreenTheme">@style/Base.Theme.CatHelp</item>
+
     </style>
 
-    <style name="Theme.CatHelp" parent="Base.Theme.CatHelp" />
+    <style name="Theme.CatHelp" parent="Base.Theme.CatHelp" >
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
 
     <style name="Theme.CatHelp.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
 
+
     <style name="Theme.CatHelp.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.CatHelp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="MyActionBar" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:background">@color/new_pink</item>
+<!--        <item name="android:titleTextStyle">@style/AppTheme.ActionBar.TitleTextStyle</item>-->
+        <item name="android:fontFamily">@font/titan_one</item>
+        <item name="android:textColor">@color/new_pink</item>
+
+
+    </style>
+
+    <style name="AppTheme.ActionBar.TitleTextStyle" parent="@android:style/TextAppearance.StatusBar.Title">
+        <item name="android:textColor">@color/new_pink</item>
+        <item name="fontFamily">@font/titan_one</item>
+    </style>
 </resources>

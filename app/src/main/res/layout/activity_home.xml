@@ -3,15 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <Toolbar
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@drawable/transparent_backround"
+    android:layout_height="match_parent"
 
+    >
+    <com.rey.material.widget.RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_marginBottom="80dp"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toTopOf="@id/navigationView">
 
-    </Toolbar>
+
+
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_host_fragment"
@@ -19,8 +21,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:defaultNavHost="true"
-        app:layout_constraintBottom_toTopOf="@id/navigationView"
-        app:navGraph="@navigation/nav_graph" />
+
+
+        app:navGraph="@navigation/nav_graph"
+
+
+        />
+    </com.rey.material.widget.RelativeLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/navigationView"
@@ -28,7 +35,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/transparent_backround"
         app:itemActiveIndicatorStyle="@style/AppCustomIndicator"
-        app:itemIconTint="@color/grey"
+        app:itemIconTint="@color/new_yellow"
         app:itemRippleColor="@color/grey_white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/bottom_menu">
@@ -39,8 +46,9 @@
             android:layout_gravity="center"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            app:maxImageSize="40dp"
-            app:tint="@color/pink_very_white"
+            app:maxImageSize="35dp"
+
+            app:tint="@color/new_pink"
             android:elevation="6dp"
             app:rippleColor="@color/grey_white"
             android:clickable="true"

@@ -1,0 +1,77 @@
+<resources>
+    <string name="app_name">CatHelp</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+
+
+    <string name="API_KEY_MAP">AIzaSyA39AVQQXRUmn0tjDU85LkmEKjWX60-MP8</string>
+    <string name="add_an_image">добавьте картинку</string>
+    <string name="add_a_description">добавьте описание</string>
+    <string name="how_to_contact_you">как с вами связаться?</string>
+    <string name="add_a_title">добавьте заголовок</string>
+    <string name="add_a_price">укажите цену</string>
+    <string name="address_not_selected">адрес не выбран</string>
+    <string name="add_an_address">укажите адрес</string>
+    <string name="error">"Ошибка:( "</string>
+    <string name="image_save">Картинка сохранена</string>
+    <string name="event_added">Объявление добавлено</string>
+    <string name="title">Заголовок</string>
+    <string name="description">Описание...</string>
+    <string name="open_maps">открыть карты</string>
+    <string name="type_event">Тип объявления:</string>
+    <string name="selling">Продаю</string>
+    <string name="for_free">Даром</string>
+    <string name="price">Стоимость</string>
+    <string name="save">Сохранить</string>
+    <string name="cat">кот</string>
+    <string name="dog">собака</string>
+    <string name="parrot">птица</string>
+    <string name="fish">аквариумная рыбка</string>
+    <string name="exotic">экзотичесое животное</string>
+    <string name="delete">Удалить</string>
+    <string name="are_you_sure_you_want_to_delete">Вы уверены, что хотите удалить?</string>
+    <string name="cancel">Отмена</string>
+    <string name="submit">Продолжить</string>
+    <string name="add_name">добавьте имя</string>
+    <string name="add_e_mail">добавьте e-mail</string>
+    <string name="add_password">добавьте пароль</string>
+    <string name="authentication_failed">Аутентификация не удалась.</string>
+    <string name="successful">Успешно!</string>
+    <string name="delete_account">Удалить аккаунт</string>
+    <string name="are_you_sure_you_delete_account">Вы уверены, что хотите удалить аккаунт??</string>
+    <string name="uncorrect_password">Неверный пароль!</string>
+    <string name="password_change_successful">Пароль успешно изменён!</string>
+    <string name="saved">Сохранено</string>
+    <string name="no_internet">Сеть отсутствует</string>
+    <string name="please_check_your_internet_connection">Пожалуйста, проверьте ваше интернет-соединение</string>
+    <string name="retry">Повторить попытку</string>
+    <string name="exit">Выйти</string>
+    <string name="login">Логин</string>
+    <string name="password">Пароль</string>
+    <string name="e_mail">E-mail</string>
+    <string name="register">Зарегестрироваться</string>
+    <string name="log_in">Авторизоваться</string>
+    <string name="forgot_password">Забыли пароль?</string>
+    <string name="log_out">Выйти</string>
+    <string name="old_password">Старый пароль</string>
+    <string name="new_password">Новый пароль</string>
+    <string name="update_password">Обновить пароль</string>
+    <string name="hi">Hi!</string>
+    <string name="my_events">моё</string>
+    <string name="settings">настройки</string>
+    <string name="home">Home</string>
+    <string name="maps">Maps</string>
+    <string name="favourites">Favourites</string>
+    <string name="my_events_top">My events</string>
+</resources>
