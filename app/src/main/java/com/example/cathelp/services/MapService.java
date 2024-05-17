@@ -55,7 +55,7 @@ public class MapService implements OnMapReadyCallback, GoogleMap.OnMapClickListe
 
     public MapService(final Context context,double latitude,double longitude) {
         this.context = context;
-        this.latitude =  latitude;
+        this.latitude = latitude;
         this.longitude = longitude;
     }
 

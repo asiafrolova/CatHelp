@@ -17,6 +17,7 @@ import androidx.navigation.Navigation;
 import com.bumptech.glide.Glide;
 import com.example.cathelp.R;
 import com.example.cathelp.databinding.FragmentAccountBinding;
+import com.example.cathelp.repositories.EventRepo;
 import com.example.cathelp.view.SettingsActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -63,6 +64,7 @@ public class AccountFragment extends Fragment {
         binding.myEventBtn.setOnClickListener(v -> {
             navController.navigate(R.id.action_accountFragment_to_myEventFragment);
         });
+        
 
     }
 

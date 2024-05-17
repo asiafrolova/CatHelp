@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.cathelp.R;
+import com.example.cathelp.repositories.EventRepo;
 import com.example.cathelp.repositories.HomeRepo;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -51,7 +52,6 @@ public class SplashScreenActivity extends AppCompatActivity {
                         @Override
                         public void onNegativeButtonClicked(Dialog dialog) {
                             dialog.dismiss();
-                            new HomeRepo().loadEvents();
                             startActivity(new Intent(SplashScreenActivity.this,SplashScreenActivity.class));
                         }
                     })
@@ -59,6 +59,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         } else{
             mAuth = FirebaseAuth.getInstance();
             if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+
                 reload();
 
 

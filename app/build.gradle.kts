@@ -62,6 +62,7 @@ android {
 
         implementation ("com.github.bumptech.glide:glide:4.16.0")
         implementation ("androidx.room:room-runtime:2.6.1")
+        implementation("androidx.core:core:1.13.1")
         annotationProcessor ("androidx.room:room-compiler:2.6.1")
         implementation ("androidx.room:room-rxjava3:2.6.1")
 
@@ -101,16 +102,15 @@ android {
 
         implementation(platform("com.google.firebase:firebase-bom:32.8.1"))
         implementation("com.google.firebase:firebase-auth:22.3.1")
-
         implementation ("androidx.fragment:fragment:1.6.2")
 
 
-        implementation ("com.github.suchoX:PlacePicker:1.1.2")
+
         implementation ("com.google.android.gms:play-services-maps:18.2.0")
         implementation ("com.google.android.material:material:1.11.0")
         implementation ("com.google.android.libraries.places:places:3.4.0")
-
         implementation ("io.nlopez.smartlocation:library:3.3.3")
+        implementation ("com.github.suchoX:PlacePicker:1.1.2")
 
 
 
