@@ -24,6 +24,7 @@ public class EventRepo {
     private ArrayList<LinkMark> listLink = new ArrayList<>();
     public static ArrayList<Event> listEvents = new ArrayList<>();
 
+    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
 
     private MutableLiveData<List<Event>> mutableMyEvents = new MutableLiveData<>();
@@ -31,7 +32,7 @@ public class EventRepo {
     //private HomeRepo homeRepo = new HomeRepo();
 
     //private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
-    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
 
     public EventRepo() {
 
@@ -56,7 +57,7 @@ public class EventRepo {
         Future<List<LinkMark>> result = es.submit(new Callable<List<LinkMark>>() {
             @Override
             public List<LinkMark> call() throws Exception {
-                listLink = (ArrayList<LinkMark>) instance.marksDao().getAll();
+                listLink = (ArrayList<LinkMark>) instance.marksDao().getAll(mAuth.getCurrentUser().getUid());
 
                 while (true) {
                     if (listLink != null) {
@@ -119,12 +120,12 @@ public class EventRepo {
             @Override
             public void run() {
                 if(instance.marksDao().getById(event.getName()) != null){
-                    instance.marksDao().delete(new LinkMark(event.getName()));
-                    listLink = (ArrayList<LinkMark>) instance.marksDao().getAll();
+                    instance.marksDao().delete(new LinkMark(event.getName(),mAuth.getCurrentUser().getUid()));
+                    listLink = (ArrayList<LinkMark>) instance.marksDao().getAll(mAuth.getCurrentUser().getUid());
 
                 }else{
-                    instance.marksDao().insert(new LinkMark(event.getName()));
-                    listLink = (ArrayList<LinkMark>) instance.marksDao().getAll();
+                    instance.marksDao().insert(new LinkMark(event.getName(),mAuth.getCurrentUser().getUid()));
+                    listLink = (ArrayList<LinkMark>) instance.marksDao().getAll(mAuth.getCurrentUser().getUid());
 
                 }
 
@@ -142,8 +143,8 @@ public class EventRepo {
             @Override
             public void run() {
                 if(instance.marksDao().getById(event.getName()) != null){
-                    instance.marksDao().delete(new LinkMark(event.getName()));
-                    listLink = (ArrayList<LinkMark>) instance.marksDao().getAll();
+                    instance.marksDao().delete(new LinkMark(event.getName(),mAuth.getCurrentUser().getUid()));
+                    listLink = (ArrayList<LinkMark>) instance.marksDao().getAll(mAuth.getCurrentUser().getUid());
                 }
 
 

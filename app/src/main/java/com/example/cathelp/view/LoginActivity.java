@@ -19,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.cathelp.R;
 import com.example.cathelp.databinding.ActivityLoginBinding;
+import com.example.cathelp.repositories.App;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -132,8 +133,9 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            
+
                             startActivity(new Intent(LoginActivity.this,HomeActivity.class));
+
                             binding.loadingBar.setVisibility(View.GONE);
                         }else{
                             Toast.makeText(LoginActivity.this,"Error:(", LENGTH_LONG).show();

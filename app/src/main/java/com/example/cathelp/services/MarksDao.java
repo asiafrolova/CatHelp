@@ -12,8 +12,8 @@ import java.util.List;
 
 @Dao
 public interface MarksDao {
-    @Query("SELECT * FROM linkmark")
-    List<LinkMark> getAll();
+    @Query("SELECT * FROM linkmark WHERE author = :author")
+    List<LinkMark> getAll(String author);
 
     @Query("SELECT * FROM linkmark WHERE nameEvent = :name")
     LinkMark getById(String name);

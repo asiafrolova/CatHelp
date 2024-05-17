@@ -28,7 +28,10 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContract;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -42,22 +45,31 @@ import com.example.cathelp.repositories.HomeRepo;
 import com.example.cathelp.model.Event;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.libraries.places.api.model.Place;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+
 import com.sucho.placepicker.AddressData;
 import com.sucho.placepicker.Constants;
 import com.sucho.placepicker.MapType;
 import com.sucho.placepicker.PlacePicker;
+import com.sucho.placepicker.PlacePickerActivity;
 import com.theartofdev.edmodo.cropper.CropImage;
+import com.vanillaplacepicker.data.VanillaAddress;
+import com.vanillaplacepicker.presentation.builder.VanillaPlacePicker;
+
+import com.vanillaplacepicker.utils.PickerLanguage;
+import com.vanillaplacepicker.utils.PickerType;
 
 
 import java.io.IOException;
@@ -91,7 +103,6 @@ public class AddNewProductActivity extends AppCompatActivity {
         binding = ActivityAddNewProductBinding.inflate(getLayoutInflater());
         super.onCreate(savedInstanceState);
         setContentView(binding.getRoot());
-
 
 
         res = this.getResources();
@@ -139,15 +150,57 @@ public class AddNewProductActivity extends AppCompatActivity {
             }
         });
         binding.mapAdd.setOnClickListener(v -> {
-
+            binding.loadingBarAdd.setVisibility(View.VISIBLE);
             locationPermissionRequest.launch(new String[]{
                     Manifest.permission.ACCESS_FINE_LOCATION,
                     Manifest.permission.ACCESS_COARSE_LOCATION
             });
 
         });
+        /*binding.mapAdd2.setOnClickListener(v -> {
 
+            Intent intent = new VanillaPlacePicker.Builder(this)
+                    .with(PickerType.MAP_WITH_AUTO_COMPLETE) // Select Picker type to enable autocompelte, map or both
+                    .withLocation(latitude, longitude)
+                    .setPickerLanguage(PickerLanguage.ENGLISH) // Apply language to picker
+                    .setLocationRestriction(new LatLng(latitude,72.5325067), new LatLng(23.0587592,72.5357321)) // Restrict location bounds in map and autocomplete
+                    .setCountry("IN") // Only for Autocomplete
+                    .enableShowMapAfterSearchResult(true) // To show the map after selecting the place from place picker only for PickerType.MAP_WITH_AUTO_C
+                    *//*
+                     * Configuration for Map UI
+                     *//*
+                    //.setMapType(MapType.NORMAL) // Choose map type (Only applicable for map screen)
+                    .setMapStyle(R.raw.map_style) // Containing the JSON style declaration for night-mode styling
+                    .setMapPinDrawable(android.R.drawable.ic_menu_mylocation) // To give custom pin image for map marker
+                    .build();
+
+            placePickerLauncher.launch(intent);
+        });*/
     }
+    private ActivityResultLauncher<Intent> placePickerLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult o) {
+                    if(o.getResultCode() == Activity.RESULT_OK){
+
+                        Intent data = o.getData();
+                        if (o.getResultCode() == Activity.RESULT_OK && data != null) {
+                            VanillaAddress vanillaAddress = VanillaPlacePicker.Companion.getPlaceResult(data);
+                        }
+                        if(data!=null){
+                            latitude = data.getDoubleExtra("latitude",0.0);
+                            longitude = data.getDoubleExtra("longitude",0.0);
+                            adress = data.getStringExtra("address");
+
+                            Log.d("PLACE",latitude+ " LAT "+longitude+" LONG "+adress+" ADD ");
+                        }
+                    }else{
+                        Log.d("PLACE","Error");
+                    }
+                }
+            }
+    );
 
     ActivityResultLauncher<String[]> locationPermissionRequest =
             registerForActivityResult(new ActivityResultContracts
@@ -198,6 +251,7 @@ public class AddNewProductActivity extends AppCompatActivity {
 
 
     private void showPlacePicker(double longitude,double latitude) {
+        PlacePickerActivity activity = new PlacePickerActivity();
             Intent intent = new PlacePicker.IntentBuilder()
                     .setLatLong(latitude, longitude)
                     .setFabColor(R.color.new_pink)
@@ -215,6 +269,7 @@ public class AddNewProductActivity extends AppCompatActivity {
 
 
     }
+
 
     private void ValidateEventData() {
 
@@ -380,6 +435,8 @@ public class AddNewProductActivity extends AppCompatActivity {
                 }*/
 
 
+
+                binding.loadingBarAdd.setVisibility(View.INVISIBLE);
                 if (requestCode == Constants.PLACE_PICKER_REQUEST) {
                     if (resultCode == Activity.RESULT_OK && data != null) {
                         try {
@@ -387,6 +444,7 @@ public class AddNewProductActivity extends AppCompatActivity {
                             latitude = addressData.component1();
                             longitude = addressData.component2();
                             binding.textAdress.setText(addressData.component3().get(0).getAddressLine(0).toString());
+
                         } catch (Exception e) {
                             Log.e("AddEventActivity", e.getMessage());
                         }

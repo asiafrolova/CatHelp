@@ -4,6 +4,7 @@ import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.BindingAdapter;
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -19,6 +20,16 @@ public class LinkMark {
     private String nameEvent = " ";
     private boolean isMark = true;
 
+    private String author= " ";
+
+    public String getAuthor() {
+        return this.author;
+    }
+
+    public void setAuthor(final String author) {
+        this.author = author;
+    }
+
     public boolean isMark() {
         return this.isMark;
     }
@@ -27,8 +38,9 @@ public class LinkMark {
         this.isMark = mark;
     }
 
-    public LinkMark(final String nameEvent) {
+    public LinkMark(final String nameEvent, String author) {
         this.nameEvent = nameEvent;
+        this.author = author;
     }
 
     public String getNameEvent() {

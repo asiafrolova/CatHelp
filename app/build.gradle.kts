@@ -19,6 +19,8 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+
     }
     dataBinding{
         enable = true
@@ -111,6 +113,15 @@ android {
         implementation ("com.google.android.libraries.places:places:3.4.0")
         implementation ("io.nlopez.smartlocation:library:3.3.3")
         implementation ("com.github.suchoX:PlacePicker:1.1.2")
+
+
+
+
+
+        implementation ("com.github.Mindinventory:VanillaPlacePicker:0.3.1")
+
+
+
 
 
 

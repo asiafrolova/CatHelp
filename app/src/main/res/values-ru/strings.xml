@@ -32,7 +32,7 @@
     <string name="type_event">Тип объявления:</string>
     <string name="selling">Продаю</string>
     <string name="for_free">Даром</string>
-    <string name="price">Стоимость</string>
+    <string name="price">Стоимость (₽)</string>
     <string name="save">Сохранить</string>
     <string name="cat">кот</string>
     <string name="dog">собака</string>

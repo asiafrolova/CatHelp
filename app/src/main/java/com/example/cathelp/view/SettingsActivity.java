@@ -321,10 +321,12 @@ public class SettingsActivity extends AppCompatActivity {
                             binding.name.setText(username);
                             binding.phone.setText(email);
 
-                            if ((profileImage != "")) {
+                            if ((profileImage != "") && !profileImage.isEmpty()) {
                                 Glide.with(getApplicationContext())
                                         .load(profileImage)
                                         .into(binding.imageAccount);
+                            }else {
+                                binding.imageAccount.setImageResource(R.drawable.animal_default);
                             }
                         }
 

@@ -32,7 +32,7 @@
     <string name="type_event">Type event:</string>
     <string name="selling">Selling</string>
     <string name="for_free">For free</string>
-    <string name="price">Price</string>
+    <string name="price">Price (₽)</string>
     <string name="save">Save</string>
     <string name="cat">cat</string>
     <string name="dog">dog</string>
