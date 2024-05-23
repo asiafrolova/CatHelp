@@ -2,6 +2,7 @@ package com.example.cathelp.view.fragments;
 
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -39,6 +40,7 @@ public class HomeFragment extends Fragment implements HomeAdapter.HomeInterface 
     private NavController navController;
     private SearchView searchView;
     private String filter = "no";
+
     private HomeRepo homeRepo = new HomeRepo();
 
     private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
@@ -61,6 +63,8 @@ public class HomeFragment extends Fragment implements HomeAdapter.HomeInterface 
 
         homeAdapter = new HomeAdapter(this);
         binding.homeRecycleView.setAdapter(homeAdapter);
+
+
         binding.scrollViewHome.setOnScrollChangeListener(new View.OnScrollChangeListener() {
             @Override
             public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {

@@ -97,6 +97,7 @@ public class AddNewProductActivity extends AppCompatActivity {
     CustomAdapter spinnerAdapter;
     Resources res ;
     private String[] animalTypes ;
+    private String[] animalTypesEN ;
 
 
     @Override
@@ -109,6 +110,8 @@ public class AddNewProductActivity extends AppCompatActivity {
         res = this.getResources();
         animalTypes = new String[]{res.getString(R.string.cat)
                 , res.getString(R.string.dog), res.getString(R.string.parrot), res.getString(R.string.fish), res.getString(R.string.exotic)};
+        animalTypesEN = new String[]{"cat"
+                , "dog", "parrot","fish", "exotic"};
         init();
         spinnerAdapter = new CustomAdapter(this,
                 R.layout.spinner_item, animalTypes);
@@ -120,7 +123,7 @@ public class AddNewProductActivity extends AppCompatActivity {
         binding.spinnerType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                animalType = animalTypes[position];
+                animalType = animalTypesEN[position];
             }
 
             @Override
