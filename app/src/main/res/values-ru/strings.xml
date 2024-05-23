@@ -74,4 +74,5 @@
     <string name="maps">Maps</string>
     <string name="favourites">Favourites</string>
     <string name="my_events_top">My events</string>
+    <string name="an_event_with_the_same_name_already_exists">Объявление с таким именем уже существует</string>
 </resources>

@@ -172,7 +172,7 @@ public class Event {
     @Override
     public boolean equals(@Nullable Object obj) {
         obj = (Event)obj;
-        return  this.getId()==((Event) obj).getId();
+        return  this.getName()==((Event) obj).getName();
 
     }
 

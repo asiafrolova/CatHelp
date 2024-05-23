@@ -21,7 +21,7 @@ import java.util.List;
 public class HomeRepo {
     private static DatabaseReference eventsRef = FirebaseDatabase.getInstance().getReference().child("Events");
     public static MutableLiveData<List<Event>> mutableEventList = new MutableLiveData<>();
-    public static HashSet<Event> eventList = new HashSet<>();
+    public static ArrayList<Event> eventList = new ArrayList<>();
     public static ArrayList<Event> searchList = new ArrayList<>();
 
     private static MutableLiveData<List<Event>> filterEventList = new MutableLiveData<>();
@@ -46,6 +46,7 @@ public class HomeRepo {
     }
 
     public List<Event> filterEvents(String category){
+        Log.d("TAG categ",category);
         List<Event> filterList = new ArrayList<>();
         List<Event> allEvents = new ArrayList<>(eventList);
 

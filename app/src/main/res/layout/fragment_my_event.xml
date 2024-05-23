@@ -45,6 +45,9 @@
         />
 
 
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
     <com.google.android.material.progressindicator.CircularProgressIndicator
 
         android:id="@+id/loadingBarMyEvents"
@@ -73,8 +76,6 @@
         app:indicatorInset="5dp">
 
     </com.google.android.material.progressindicator.CircularProgressIndicator>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.core.widget.NestedScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -41,6 +41,7 @@ import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 
 import com.example.cathelp.R;
 import com.example.cathelp.databinding.ActivityAddNewProductBinding;
+import com.example.cathelp.repositories.EventRepo;
 import com.example.cathelp.repositories.HomeRepo;
 import com.example.cathelp.model.Event;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -157,25 +158,7 @@ public class AddNewProductActivity extends AppCompatActivity {
             });
 
         });
-        /*binding.mapAdd2.setOnClickListener(v -> {
 
-            Intent intent = new VanillaPlacePicker.Builder(this)
-                    .with(PickerType.MAP_WITH_AUTO_COMPLETE) // Select Picker type to enable autocompelte, map or both
-                    .withLocation(latitude, longitude)
-                    .setPickerLanguage(PickerLanguage.ENGLISH) // Apply language to picker
-                    .setLocationRestriction(new LatLng(latitude,72.5325067), new LatLng(23.0587592,72.5357321)) // Restrict location bounds in map and autocomplete
-                    .setCountry("IN") // Only for Autocomplete
-                    .enableShowMapAfterSearchResult(true) // To show the map after selecting the place from place picker only for PickerType.MAP_WITH_AUTO_C
-                    *//*
-                     * Configuration for Map UI
-                     *//*
-                    //.setMapType(MapType.NORMAL) // Choose map type (Only applicable for map screen)
-                    .setMapStyle(R.raw.map_style) // Containing the JSON style declaration for night-mode styling
-                    .setMapPinDrawable(android.R.drawable.ic_menu_mylocation) // To give custom pin image for map marker
-                    .build();
-
-            placePickerLauncher.launch(intent);
-        });*/
     }
     private ActivityResultLauncher<Intent> placePickerLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
@@ -284,6 +267,13 @@ public class AddNewProductActivity extends AppCompatActivity {
             price  = binding.selectPrice.getText().toString();
         }else{
             price = "0";
+        }
+
+        for (Event event : HomeRepo.eventList) {
+            if(event.getName().equals(eventName)){
+                Toast.makeText(this, R.string.an_event_with_the_same_name_already_exists,Toast.LENGTH_SHORT).show();
+                return;
+            }
         }
 
         if (ImageUri == null){

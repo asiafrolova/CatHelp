@@ -83,9 +83,7 @@ public class AccountFragment extends Fragment {
                         binding.phone.setText(email);
 
                         if (profileImage.isEmpty()) {
-//                            Glide.with(getContext())
-//                                    .load("https://i.pinimg.com/474x/bd/18/cb/bd18cb31dc17600e58570dbf53ce38da.jpg")
-//                                    .into(binding.imageAccount);
+                            binding.imageAccount.setImageResource(R.drawable.animal_default);
 
                         }else{
                             Glide.with(getContext())

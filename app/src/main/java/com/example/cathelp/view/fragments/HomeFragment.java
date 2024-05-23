@@ -129,11 +129,11 @@ public class HomeFragment extends Fragment implements HomeAdapter.HomeInterface 
             dataObserve();
         });
         binding.filterSalamand.setOnClickListener(v -> {
-            if(filter.equals("salamand")){
+            if(filter.equals("exotic")){
                 filter = "no";
                 setPressedFilter();
             }else {
-                filter = "salamand";
+                filter = "exotic";
                 setPressedFilter();
             }
             homeRepo.filterEvents(filter);
@@ -229,7 +229,7 @@ public class HomeFragment extends Fragment implements HomeAdapter.HomeInterface 
                 binding.filterFish.setBackgroundResource(R.drawable.view_card_grey);
                 binding.filterSalamand.setBackgroundResource(R.drawable.view_card);
                 break;
-            case "salamand":
+            case "exotic":
                 binding.filterDog.setBackgroundResource(R.drawable.view_card);
                 binding.filterCat.setBackgroundResource(R.drawable.view_card);
                 binding.filterParrot.setBackgroundResource(R.drawable.view_card);
@@ -256,14 +256,7 @@ public class HomeFragment extends Fragment implements HomeAdapter.HomeInterface 
             public void onChanged(List<Event> events) {
                 homeAdapter.submitList(events);
                 homeAdapter.notifyDataSetChanged();
-                //Log.d("Fragmen","start "+filter);
-                //Log.d("Fragmen","observe"+events);
-                    /*homeAdapter.submitList(events, new Runnable() {
-                        @Override
-                        public void run() {
-                            homeAdapter.notifyDataSetChanged();
-                        }
-                    });*/
+
 
 
 
