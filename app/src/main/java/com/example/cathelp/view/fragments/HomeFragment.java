@@ -2,7 +2,6 @@ package com.example.cathelp.view.fragments;
 
 import android.app.SearchManager;
 import android.content.Context;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -47,7 +46,7 @@ public class HomeFragment extends Fragment implements HomeAdapter.HomeInterface 
 
 
     public HomeFragment() {
-        // Required empty public constructor
+
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -162,7 +161,6 @@ public class HomeFragment extends Fragment implements HomeAdapter.HomeInterface 
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
 
         inflater.inflate(R.menu.options_menu, menu);
-        //searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
 
         searchView = (SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.search));
 
@@ -174,16 +172,12 @@ public class HomeFragment extends Fragment implements HomeAdapter.HomeInterface 
             @Override
             public boolean onQueryTextSubmit(String query) {
                 homeRepo.searchEvents(query);
-                //searchDatabase(query);
-                //homeAdapter.notifyDataSetChanged();
                 dataObserve();
                 return true;
             }
             @Override
             public boolean onQueryTextChange(String query) {
-                //homeRepo.searchEvents(query);
-                //searchDatabase(query);
-                //dataObserve();
+
                 if(query.isEmpty() || query.equals(" ")){
                     homeRepo.searchEvents(query);
                     dataObserve();
@@ -292,10 +286,6 @@ public class HomeFragment extends Fragment implements HomeAdapter.HomeInterface 
         super.onStart();
         homeAdapter = new HomeAdapter(this);
 
-        /*binding.homeRecycleView.addItemDecoration(new DividerItemDecoration(requireContext(),
-                DividerItemDecoration.VERTICAL));
-        binding.homeRecycleView.addItemDecoration(new DividerItemDecoration(requireContext(),
-                DividerItemDecoration.HORIZONTAL));*/
 
         dataObserve();
     }

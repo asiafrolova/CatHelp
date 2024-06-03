@@ -4,8 +4,6 @@ import static com.example.cathelp.view.StartActivity.APP_PREFERENCES_LOCALE;
 import static com.example.cathelp.view.StartActivity.mSettings;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -56,7 +54,9 @@ public class RegisterActivity extends AppCompatActivity {
         } else if (TextUtils.isEmpty(phone)) {
             Toast.makeText(this, R.string.add_e_mail,Toast.LENGTH_LONG).show();
         } else if (TextUtils.isEmpty(password)) {
-            Toast.makeText(this, R.string.add_password,Toast.LENGTH_LONG).show();
+
+        }else if(password.length()<8){
+            Toast.makeText(this, R.string.password_must_be_longer_than_8_characters,Toast.LENGTH_LONG).show();
         }else{
             binding.loadingBar.setVisibility(ProgressBar.VISIBLE);
 
@@ -75,7 +75,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                 }else{
                     Log.d("TAG", "signInWithEmail:failure", task.getException());
-                    Toast.makeText(RegisterActivity.this, R.string.authentication_failed,
+                    Toast.makeText(RegisterActivity.this, R.string.registration_failed,
                             Toast.LENGTH_SHORT).show();
                 }
 

@@ -38,8 +38,10 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.drawable.RoundedBitmapDrawable;
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.cathelp.R;
+import com.example.cathelp.adapters.ViewPagerImageAdapter;
 import com.example.cathelp.databinding.ActivityAddNewProductBinding;
 import com.example.cathelp.repositories.EventRepo;
 import com.example.cathelp.repositories.HomeRepo;
@@ -54,9 +56,11 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.libraries.places.api.model.Place;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.ListResult;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
@@ -75,6 +79,7 @@ import com.vanillaplacepicker.utils.PickerType;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
@@ -84,6 +89,9 @@ public class AddNewProductActivity extends AppCompatActivity {
     private static final int GALLERY = 1;
 
     private Uri ImageUri;
+    private Uri ImageUriResult;
+    private ArrayList<Uri> ImageUries  =new ArrayList<>();
+    private ArrayList<String> downloadImageUrls;
     private String description, price, eventName, author, imageName, adress, animalType, connection;
     private double latitude = 0, longitude = 0;
     private String saveCurrentDate, saveCurrentTime;
@@ -98,6 +106,9 @@ public class AddNewProductActivity extends AppCompatActivity {
     Resources res ;
     private String[] animalTypes ;
     private String[] animalTypesEN ;
+    private ViewPagerImageAdapter adapter;
+    private int positionPager;
+
 
 
     @Override
@@ -131,13 +142,25 @@ public class AddNewProductActivity extends AppCompatActivity {
 
             }
         });
-
-        binding.selectImage.setOnClickListener(v -> {
+        binding.addImageBtn.setOnClickListener(v -> {
             //OpenGallery();
-            CropImage.activity(ImageUri)
+            CropImage.activity()
                     .setAspectRatio(1, 1)
                     .start(AddNewProductActivity.this);
         });
+        binding.deleteImageBtn.setOnClickListener(v -> {
+            if(downloadImageUrls.size()>1){
+                downloadImageUrls.remove(binding.viewPager.getCurrentItem());
+                ImageUries.remove(binding.viewPager.getCurrentItem());
+                adapter = new ViewPagerImageAdapter(downloadImageUrls);
+                binding.viewPager.setAdapter(adapter);
+            }else{
+
+                Toast.makeText(this,R.string.you_cant_delete_a_picture,Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
         binding.saveBtn.setOnClickListener(v -> {
             ValidateEventData();
         });
@@ -279,7 +302,10 @@ public class AddNewProductActivity extends AppCompatActivity {
             }
         }
 
-        if (ImageUri == null){
+        /*if (ImageUri == null){
+            Toast.makeText(this, R.string.add_an_image,Toast.LENGTH_SHORT).show();
+        }*/
+        if(ImageUries.size()==0){
             Toast.makeText(this, R.string.add_an_image,Toast.LENGTH_SHORT).show();
         }
         else if(TextUtils.isEmpty(description)){
@@ -296,11 +322,17 @@ public class AddNewProductActivity extends AppCompatActivity {
         }
         else {
             binding.loadingBar.setVisibility(ProgressBar.VISIBLE);
-            StoreEventInformation();
+            for (int i = 0; i < ImageUries.size(); i++) {
+                Log.d("IMAGE","i is "+i+" ");
+                StoreEventInformation(ImageUries.get(i),i);
+            }
+
+
         }
     }
 
-    private void StoreEventInformation() {
+    private void StoreEventInformation(Uri photoUri,int index) {
+
         Calendar calendar = Calendar.getInstance();
 
         SimpleDateFormat currentDate = new SimpleDateFormat("ddMMyyyy");
@@ -310,16 +342,17 @@ public class AddNewProductActivity extends AppCompatActivity {
         saveCurrentTime = currentTime.format(calendar.getTime());
 
         eventRandomKey = saveCurrentDate + saveCurrentTime;
-        StorageReference filePath = EventImageRef.child(ImageUri.getLastPathSegment() + eventRandomKey );
-        imageName =  ImageUri.getLastPathSegment() + eventRandomKey;
-        UploadTask uploadTask = filePath.putFile(ImageUri);
+        Log.d("IMAGE","name is "+photoUri.getLastPathSegment());
+        StorageReference filePath = EventImageRef.child(eventName).child(photoUri.getLastPathSegment() + eventRandomKey );
+        imageName =  photoUri.getLastPathSegment() + eventRandomKey;
+        UploadTask uploadTask = filePath.putFile(photoUri);
 
         uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 String message = e.toString();
                 Toast.makeText(AddNewProductActivity.this,getString(R.string.error)+message,Toast.LENGTH_SHORT).show();
-                binding.loadingBar.setVisibility(ProgressBar.GONE);
+                //binding.loadingBar.setVisibility(ProgressBar.GONE);
             }
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
@@ -336,7 +369,10 @@ public class AddNewProductActivity extends AppCompatActivity {
                                     @Override
                                     public void onSuccess(Uri uri) {
                                         downloadImageUrl = uri.toString();
-                                        SaveEventInfoToDataBase();
+                                        if(index==ImageUries.size()-1){
+                                            Log.d("IMAGE",index+" index is "+ImageUries.size());
+                                            SaveEventInfoToDataBase();
+                                        }
                                         //eventsRef.child("Events").child(eventName).child(AccountFragment.PATH_IMAGE).setValue(uri.toString());
                                     }
                                 });
@@ -366,6 +402,9 @@ public class AddNewProductActivity extends AppCompatActivity {
             }
 
             private void SaveEventInfoToDataBase() {
+                Log.d("IMAGE",downloadImageUrl);
+
+
                 HashMap<String, Object> eventMap = new HashMap<>();
 
 
@@ -374,7 +413,7 @@ public class AddNewProductActivity extends AppCompatActivity {
                 eventMap.put("date", saveCurrentDate);
                 eventMap.put("time", saveCurrentTime);
                 eventMap.put("description", description);
-                eventMap.put("image",downloadImageUrl);
+                eventMap.put("image",downloadImageUrls.get(0));
                 //eventMap.put("category", categoryName);
                 eventMap.put("price", price);
                 eventMap.put("eventName", eventName);
@@ -394,7 +433,6 @@ public class AddNewProductActivity extends AppCompatActivity {
                             Intent homeIntent = new Intent(AddNewProductActivity.this, HomeActivity.class);
                             startActivity(homeIntent);
 
-                            //new HomeRepo().loadEvents();
                             HomeRepo.eventList.add(new Event(eventName,description,eventRandomKey,author,downloadImageUrl,imageName,adress,animalType,latitude,longitude,Integer.parseInt(price),connection));
 
 
@@ -420,12 +458,7 @@ public class AddNewProductActivity extends AppCompatActivity {
 
             @Override
             protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-                //super.onActivityResult(requestCode, resultCode, data);
 
-                /*if (requestCode == GALLERY && resultCode == RESULT_OK && data != null) {
-                    ImageUri = data.getData();
-                    binding.selectImage.setImageURI(ImageUri);
-                }*/
 
 
 
@@ -448,19 +481,23 @@ public class AddNewProductActivity extends AppCompatActivity {
 
                     if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
                         CropImage.ActivityResult result = CropImage.getActivityResult(data);
-                        ImageUri = result.getUri();
 
-
-
-                        Bitmap bitmap = null;
-                        try {
-                            bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), ImageUri);
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
+                        ImageUriResult = result.getUri();
+                        ImageUries.add(ImageUriResult);
+                        ImageUri = ImageUriResult;
+                        if(ImageUries.size()>1){
+                            binding.deleteImageBtn.setVisibility(View.VISIBLE);
+                        }else{
+                            binding.deleteImageBtn.setVisibility(View.GONE);
                         }
-                        RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(), bitmap);
-                        roundedBitmapDrawable.setCornerRadius(20);
-                        binding.selectImage.setImageBitmap(bitmap);
+
+                        downloadImageUrls.add(ImageUriResult.toString());
+                        adapter = new ViewPagerImageAdapter(downloadImageUrls);
+                        binding.viewPager.setAdapter(adapter);
+
+                        binding.selectImage.setVisibility(View.GONE);
+
+
 
                     }
                 }
@@ -532,6 +569,10 @@ public class AddNewProductActivity extends AppCompatActivity {
                             config,
                             getResources().getDisplayMetrics());
                 }
+
+                adapter = new ViewPagerImageAdapter(downloadImageUrls);
+                downloadImageUrls = new ArrayList<>();
+
 
 
 

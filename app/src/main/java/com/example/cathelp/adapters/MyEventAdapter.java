@@ -1,6 +1,5 @@
 package com.example.cathelp.adapters;
 
-import android.provider.CalendarContract;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -8,7 +7,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.cathelp.databinding.EventsItemBinding;
 import com.example.cathelp.databinding.MyEventItemBinding;
 import com.example.cathelp.model.Event;
 

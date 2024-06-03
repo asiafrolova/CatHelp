@@ -1,5 +1,6 @@
 package com.example.cathelp.model;
 
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -8,11 +9,13 @@ import androidx.annotation.Nullable;
 import androidx.databinding.BindingAdapter;
 import androidx.fragment.app.FragmentContainerView;
 import androidx.recyclerview.widget.DiffUtil;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.cathelp.R;
+import com.example.cathelp.adapters.ViewPagerImageAdapter;
 import com.example.cathelp.view.fragments.SmallMapsFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DataSnapshot;
@@ -21,7 +24,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.Objects;
+import java.util.ArrayList;
 
 public class Event {
     private String name = "";
@@ -39,6 +42,7 @@ public class Event {
     private LatLng latLng;
     private String connection;
 
+    private ArrayList<String> images = new ArrayList<>();
     public LatLng getLatLng() {
         return this.latLng;
     }
@@ -61,6 +65,31 @@ public class Event {
         this.price = price;
         this.latLng = new LatLng(latitude,longitude);
         this.connection = connection;
+    }
+    public Event(final String name, final String description, final String id, final String author, final ArrayList<String> images,String imageUri, final String imageName, final String addres, final String animalType, final double latitude, final double longitude, final double price, final String connection) {
+        this.name = name;
+        this.description = description;
+        this.id = id;
+        this.author = author;
+        this.imageUri = imageUri;
+        this.images = images;
+        this.imageName = imageName;
+        this.addres = addres;
+        this.animalType = animalType;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.price = price;
+        this.latLng = new LatLng(latitude,longitude);
+        this.connection = connection;
+
+    }
+
+    public ArrayList<String> getImages() {
+        return this.images;
+    }
+
+    public void setImages(final ArrayList<String> images) {
+        this.images = images;
     }
 
     public String getConnection() {
@@ -176,10 +205,7 @@ public class Event {
 
     }
 
-    /*@Override
-    public int hashCode() {
-        return Objects.hash(this.name, this.description, this.id, this.imageUri, this.floorUri, this.price);
-    }*/
+
 
     @Override
     public String toString() {
@@ -204,17 +230,28 @@ public class Event {
     };
     @BindingAdapter("android:eventImage")
 
-    public static void loadImage(ImageView imageView, String imageUri){
+    public static void loadImage(ImageView imageView, Event event){
+
         imageView.setBackgroundResource(R.drawable.animal_default);
 
 
         imageView.setClipToOutline(true);
         imageView.setBackground(null);
         Glide.with(imageView)
-                .load(imageUri)
+                .load(event.getImageUri())
                 .fitCenter()
                 .apply(RequestOptions.bitmapTransform(new RoundedCorners(20)))
                 .into(imageView);
+    }
+    @BindingAdapter("android:listImages")
+
+    public static void loadListImage(ViewPager2 viewPager2, Event event){
+
+        if (!event.getImages().isEmpty()){
+
+            ViewPagerImageAdapter adapter = new ViewPagerImageAdapter(event.getImages());
+            viewPager2.setAdapter(adapter);
+        }
     }
     @BindingAdapter("android:authorName")
 

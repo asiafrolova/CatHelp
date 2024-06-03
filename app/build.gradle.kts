@@ -114,6 +114,9 @@ android {
         implementation ("io.nlopez.smartlocation:library:3.3.3")
         implementation ("com.github.suchoX:PlacePicker:1.1.2")
 
+        implementation ("com.squareup.picasso:picasso:2.8")
+
+
 
 
 

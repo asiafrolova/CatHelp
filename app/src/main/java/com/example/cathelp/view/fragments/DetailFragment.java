@@ -23,7 +23,7 @@ public class DetailFragment extends Fragment{
     static HomeViewModel homeViewModel;
 
     public DetailFragment() {
-        // Required empty public constructor
+
     }
 
     @Override
@@ -40,7 +40,7 @@ public class DetailFragment extends Fragment{
         homeViewModel = new ViewModelProvider(requireActivity()).get(HomeViewModel.class);
         fragmentDetailBinding.setHomeViewModel(homeViewModel);
         fragmentDetailBinding.exitDetail.setOnClickListener(v -> {
-            Log.d("EXIT","exit");
+
             getActivity().getFragmentManager().popBackStack();
             getActivity().getSupportFragmentManager().popBackStack();
 

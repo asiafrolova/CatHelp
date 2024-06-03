@@ -29,9 +29,7 @@ public class EventRepo {
 
     private MutableLiveData<List<Event>> mutableMyEvents = new MutableLiveData<>();
     private ArrayList<Event> myEventsList  =new ArrayList<>();
-    //private HomeRepo homeRepo = new HomeRepo();
 
-    //private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
 
 
     public EventRepo() {

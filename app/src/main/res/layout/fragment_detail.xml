@@ -37,13 +37,15 @@
 
 
             <com.google.android.material.imageview.ShapeableImageView
-                android:eventImage="@{homeViewModel.event.imageUri}"
+                android:eventImage="@{homeViewModel.event}"
+
 
                 android:id="@+id/select_image"
                 android:backgroundTint="@color/grey_white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:layout_height="400dp"
+
                 android:src="@drawable/animal_default"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -51,6 +53,19 @@
                 app:layout_constraintTop_toTopOf="parent">
 
             </com.google.android.material.imageview.ShapeableImageView>
+            <androidx.viewpager2.widget.ViewPager2
+                android:listImages="@{homeViewModel.event}"
+
+                android:id="@+id/view_pager_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:layout_height="400dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            </androidx.viewpager2.widget.ViewPager2>
 
             <com.rey.material.widget.TextView
 
@@ -66,6 +81,7 @@
                 android:layout_height="wrap_content"
                 android:padding="10dp"
                 android:textSize="20dp"
+
                 android:textColor="@color/black"
                 android:inputType="textMultiLine"
                 tools:text="Name">
@@ -78,7 +94,7 @@
                 android:fontFamily="@font/tahoma"
                 android:layout_marginRight="30dp"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="0dp"
                 app:layout_constraintTop_toBottomOf="@+id/select_image"
                 android:id="@+id/priceTextView"
                 android:layout_width="match_parent"
@@ -96,7 +112,7 @@
             <com.rey.material.widget.TextView
                 android:text="@{homeViewModel.event.description}"
                 android:fontFamily="@font/tahoma"
-                tools:text="Descripyion..."
+                tools:text="Description..."
                 android:layout_marginRight="30dp"
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="10dp"

@@ -29,7 +29,7 @@ public class MapsFragment extends Fragment {
 
 
     public MapsFragment() {
-        // Required empty public constructor
+
     }
 
     @Override
@@ -42,7 +42,7 @@ public class MapsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        // Inflate the layout for this fragment
+
         return inflater.inflate(R.layout.fragment_maps, container, false);
     }
 
@@ -69,33 +69,32 @@ public class MapsFragment extends Fragment {
                                 Manifest.permission.ACCESS_COARSE_LOCATION, false);
                         if (fineLocationGranted != null && fineLocationGranted) {
                             fusedLocationClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
-                                        @Override
-                                        public void onSuccess(Location location) {
-                                            if (location != null) {
-                                                latitude = location.getLatitude();
-                                                longitude = location.getLongitude();
-                                                Log.d("MapService","start");
-                                                mapFragment.getMapAsync(new MapService(getActivity(),latitude,longitude));
+                                @Override
+                                public void onSuccess(Location location) {
+                                    if (location != null) {
+                                        latitude = location.getLatitude();
+                                        longitude = location.getLongitude();
+                                        Log.d("MapService","start");
+                                        mapFragment.getMapAsync(new MapService(getActivity(),latitude,longitude));
 
-                                            }
-                                        }
-                                    });
-
+                                    }
+                                }
+                            });
 
 
                         } else if (coarseLocationGranted != null && coarseLocationGranted) {
                             fusedLocationClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
-                                        @Override
-                                        public void onSuccess(Location location) {
-                                            if (location != null) {
-                                                latitude = location.getLatitude();
-                                                longitude = location.getLongitude();
-                                                Log.d("MapService","start");
-                                                mapFragment.getMapAsync(new MapService(getActivity(),latitude,longitude));
+                                @Override
+                                public void onSuccess(Location location) {
+                                    if (location != null) {
+                                        latitude = location.getLatitude();
+                                        longitude = location.getLongitude();
+                                        Log.d("MapService","start");
+                                        mapFragment.getMapAsync(new MapService(getActivity(),latitude,longitude));
 
-                                            }
-                                        }
-                                    });
+                                    }
+                                }
+                            });
 
 
                         } else {
@@ -105,11 +104,5 @@ public class MapsFragment extends Fragment {
                     }
             );
 
-   /* @Override
-    public void onMapReady(@NonNull GoogleMap googleMap) {
-        googleMap.addMarker(new MarkerOptions()
-                .position(new LatLng(0, 0))
-                .title("Marker"));
 
-    }*/
 }

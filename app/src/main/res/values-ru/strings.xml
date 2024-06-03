@@ -50,7 +50,7 @@
     <string name="successful">Успешно!</string>
     <string name="delete_account">Удалить аккаунт</string>
     <string name="are_you_sure_you_delete_account">Вы уверены, что хотите удалить аккаунт??</string>
-    <string name="uncorrect_password">Неверный пароль!</string>
+    <string name="uncorrected_password">Неверный пароль!</string>
     <string name="password_change_successful">Пароль успешно изменён!</string>
     <string name="saved">Сохранено</string>
     <string name="no_internet">Сеть отсутствует</string>
@@ -63,6 +63,8 @@
     <string name="register">Зарегестрироваться</string>
     <string name="log_in">Авторизоваться</string>
     <string name="forgot_password">Забыли пароль?</string>
+    <string name="know_password">Я знаю пароль</string>
+    <string name="registration_failed">Регистрация не удалась.</string>
     <string name="log_out">Выйти</string>
     <string name="old_password">Старый пароль</string>
     <string name="new_password">Новый пароль</string>
@@ -75,4 +77,7 @@
     <string name="favourites">Favourites</string>
     <string name="my_events_top">My events</string>
     <string name="an_event_with_the_same_name_already_exists">Объявление с таким именем уже существует</string>
+    <string name="you_cant_delete_a_picture">Вы не можете удалять картинки если их меньше двух</string>
+    <string name="password_must_be_longer_than_8_characters">пароль должен быть длиннее 8 символов</string>
+    <string name="reset_email_send">На ваш e-mail отправлено письмо для сброса пароля</string>
 </resources>

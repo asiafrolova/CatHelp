@@ -6,10 +6,7 @@ import static com.example.cathelp.view.StartActivity.mSettings;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,7 +17,6 @@ import androidx.navigation.ui.NavigationUI;
 
 
 import com.example.cathelp.R;
-import com.example.cathelp.repositories.EventRepo;
 import com.example.cathelp.repositories.HomeRepo;
 import com.example.cathelp.databinding.ActivityHomeBinding;
 import com.example.cathelp.viewModals.HomeViewModel;
@@ -47,7 +43,6 @@ public class  HomeActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
 
-        //setSupportActionBar(binding.toolbar);
 
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.nav_host_fragment);

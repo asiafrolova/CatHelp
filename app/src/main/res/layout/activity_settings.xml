@@ -5,18 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <com.google.android.material.appbar.MaterialToolbar
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:theme="@style/MyActionBar"
-        android:id="@+id/toolbarSearch"
-        app:menu="@menu/base_menu"
-        app:title="Settings"
 
-
-
-        />
 
 
 
@@ -178,6 +167,7 @@
 
 
 
+
         <com.rey.material.widget.Button
             android:visibility="gone"
             android:id="@+id/changePassword_btn"
@@ -308,5 +298,17 @@
         app:indicatorInset="5dp">
 
     </com.google.android.material.progressindicator.CircularProgressIndicator>
+    <com.google.android.material.appbar.MaterialToolbar
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:theme="@style/MyActionBar"
+        android:id="@+id/toolbarSearch"
+        app:menu="@menu/base_menu"
+        app:title="Settings"
+
+
+
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

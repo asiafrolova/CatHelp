@@ -23,7 +23,7 @@ public class App extends Application {
             database = Room.databaseBuilder(this, DataBaseMarks.class,"database")
                     .fallbackToDestructiveMigration()
                     .build();
-            Log.d("Start", mAuth.getCurrentUser().getUid() + " ");
+
         }
     }
 

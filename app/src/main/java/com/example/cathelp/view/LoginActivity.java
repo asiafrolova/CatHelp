@@ -6,8 +6,6 @@ import static com.example.cathelp.view.StartActivity.APP_PREFERENCES_LOCALE;
 import static com.example.cathelp.view.StartActivity.mSettings;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -19,7 +17,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.cathelp.R;
 import com.example.cathelp.databinding.ActivityLoginBinding;
-import com.example.cathelp.repositories.App;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -53,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if(task.isSuccessful()){
-                                    Toast.makeText(LoginActivity.this,"Reset emal send", LENGTH_LONG).show();
+                                    Toast.makeText(LoginActivity.this, R.string.reset_email_send, LENGTH_LONG).show();
                                 }
                             }
                         });
@@ -68,27 +65,15 @@ public class LoginActivity extends AppCompatActivity {
             if(forgetPassword){
                 forgetPassword = false;
                 binding.loginPasswordInput.setVisibility(View.VISIBLE);
-                binding.forgetPasswordLink.setText("Забыли пароль?");
+                binding.forgetPasswordLink.setText( R.string.forgot_password);
             }else{
                 forgetPassword = true;
                 binding.loginPasswordInput.setVisibility(View.GONE);
-                binding.forgetPasswordLink.setText("Я знаю пароль");
+                binding.forgetPasswordLink.setText( R.string.know_password);
             }
 
         });
-        /*binding.adminPanelLink.setOnClickListener(v -> {
-            binding.adminPanelLink.setVisibility(View.INVISIBLE);
-            binding.notAdminPanelLink.setVisibility(View.VISIBLE);
-            binding.loginBtn.setText("Вход для админа");
-            parentDbName = "Admins";
 
-        });
-        binding.notAdminPanelLink.setOnClickListener(v -> {
-            binding.adminPanelLink.setVisibility(View.VISIBLE);
-            binding.notAdminPanelLink.setVisibility(View.INVISIBLE);
-            binding.loginBtn.setText("Войти");
-            parentDbName = "Users";
-        });*/
     }
 
     @Override
@@ -118,9 +103,11 @@ public class LoginActivity extends AppCompatActivity {
 
 
         if (TextUtils.isEmpty(phone)) {
-            Toast.makeText(this,"Введите номер телефона", LENGTH_LONG).show();
+            Toast.makeText(this,R.string.add_e_mail, LENGTH_LONG).show();
         } else if (TextUtils.isEmpty(password)) {
-            Toast.makeText(this,"Введите пароль", LENGTH_LONG).show();
+            Toast.makeText(this, R.string.add_password,Toast.LENGTH_LONG).show();
+        }else if(password.length()<8){
+            Toast.makeText(this, R.string.password_must_be_longer_than_8_characters,Toast.LENGTH_LONG).show();
         }else{
             binding.loadingBar.setVisibility(ProgressBar.VISIBLE);
 
@@ -138,7 +125,7 @@ public class LoginActivity extends AppCompatActivity {
 
                             binding.loadingBar.setVisibility(View.GONE);
                         }else{
-                            Toast.makeText(LoginActivity.this,"Error:(", LENGTH_LONG).show();
+                            Toast.makeText(LoginActivity.this,R.string.error, LENGTH_LONG).show();
                             binding.loadingBar.setVisibility(View.GONE);
                         }
 

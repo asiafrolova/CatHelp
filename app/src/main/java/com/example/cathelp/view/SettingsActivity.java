@@ -1,7 +1,6 @@
 package com.example.cathelp.view;
 
 
-import static com.example.cathelp.view.StartActivity.APP_PREFERENCES;
 import static com.example.cathelp.view.StartActivity.APP_PREFERENCES_LOCALE;
 import static com.example.cathelp.view.StartActivity.mSettings;
 
@@ -9,14 +8,11 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
@@ -46,6 +42,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.ListResult;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.saadahmedev.popupdialog.PopupDialog;
@@ -70,7 +67,7 @@ public class SettingsActivity extends AppCompatActivity {
     private FirebaseStorage mStorage = FirebaseStorage.getInstance();
     private HomeViewModel homeViewModel;
     private String[] languages = {"English","Русский"};
-     // имя кота
+
 
 
 
@@ -81,14 +78,14 @@ public class SettingsActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
 
-        //SharedPreferences mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+
         ArrayAdapter<String> adapter =
                 new ArrayAdapter<>(
                         this,
                         com.chivorn.smartmaterialspinner.R.layout.smart_material_spinner_dropdown_item_layout,
                         languages);
         binding.spinnerLanguage.setAdapter(adapter);
-        //binding.spinnerLanguage.setSelection(4);
+
 
 
         loadUserInfo();
@@ -96,22 +93,6 @@ public class SettingsActivity extends AppCompatActivity {
         initLocale();
 
 
-        /*binding.spinnerLanguage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(position==0){
-                    changeLocale("en");
-                }else if(position==1){
-                    changeLocale("ru");
-                }
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });*/
         binding.exitImageView.setOnClickListener(v -> {
             mAuth.signOut();
             startActivity(new Intent(SettingsActivity.this, StartActivity.class));
@@ -162,23 +143,7 @@ public class SettingsActivity extends AppCompatActivity {
                         }
                     })
                     .show();
-            /*CharSequence options[]=new CharSequence[]{
-                    // select any from the value
-                    "Delete",
-                    "Cancel",
-            };
-            AlertDialog.Builder builder=new AlertDialog.Builder(SettingsActivity.this);
-            builder.setTitle("Delete Content");
-            builder.setItems(options, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    if(which==0) {
 
-                    }
-
-                }
-            });
-            builder.show();*/
 
 
         });
@@ -237,7 +202,6 @@ public class SettingsActivity extends AppCompatActivity {
 
 
         saveLocale(lang);
-        //startActivity(new Intent(SettingsActivity.this,SettingsActivity.class));
 
     }
     private void saveLocale(String lang) {
@@ -256,11 +220,11 @@ public class SettingsActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if(task.isSuccessful()){
-                            Log.d("Settings","user re-auth");
+
                             userUpdatePassword();
                         }
                         else {
-                            Toast.makeText(SettingsActivity.this, R.string.uncorrect_password,Toast.LENGTH_LONG).show();
+                            Toast.makeText(SettingsActivity.this, R.string.uncorrected_password,Toast.LENGTH_LONG).show();
                             binding.newPasswordInput.setText("");
                             binding.oldPasswordInput.setText("");
                         }
@@ -293,19 +257,25 @@ public class SettingsActivity extends AppCompatActivity {
 
     private void userUpdatePassword() {
         String newPassword = binding.newPasswordInput.getText().toString();
-        mAuth.getCurrentUser().updatePassword(newPassword)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful()){
-                            Toast.makeText(SettingsActivity.this, R.string.password_change_successful,Toast.LENGTH_LONG).show();
-                            binding.newPasswordInput.setText("");
-                            binding.oldPasswordInput.setText("");
-                        }else {
-                            Log.d("Settings","error in update");
+        if(newPassword.isEmpty()){
+            Toast.makeText(this, R.string.add_password,Toast.LENGTH_LONG).show();
+        }else if(newPassword.length()<8){
+            Toast.makeText(this, R.string.password_must_be_longer_than_8_characters,Toast.LENGTH_LONG).show();
+        }else {
+            mAuth.getCurrentUser().updatePassword(newPassword)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(SettingsActivity.this, R.string.password_change_successful, Toast.LENGTH_LONG).show();
+                                binding.newPasswordInput.setText("");
+                                binding.oldPasswordInput.setText("");
+                            } else {
+
+                            }
                         }
-                    }
-                });
+                    });
+        }
     }
 
 
@@ -354,7 +324,6 @@ public class SettingsActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-                                Log.d("TAG", "User email address updated.");
                                 startActivity(new Intent(SettingsActivity.this, HomeActivity.class));
 
                             }
@@ -380,8 +349,6 @@ public class SettingsActivity extends AppCompatActivity {
             if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
                 CropImage.ActivityResult result = CropImage.getActivityResult(data);
                 imageUri = result.getUri();
-
-                Log.d("TAG", imageUri.toString());
 
 
                 Bitmap bitmap = null;
@@ -409,7 +376,7 @@ public class SettingsActivity extends AppCompatActivity {
             if (imageUri != null) {
 
                 String uid = mAuth.getCurrentUser().getUid();
-                Log.d("Settings",uid);
+
                 final StorageReference ref = mStorage.getReference().child("profileImages/" + uid);
 
                 uploadTask = ref.putFile(imageUri);
@@ -443,40 +410,101 @@ public class SettingsActivity extends AppCompatActivity {
         }
 
     private void deleteEventFromDatabase(Event event){
-        StorageReference storageRef = mStorage.getReference().child("EventImages/"+event.getImageName());
 
 
-        DatabaseReference mRef  = mDatabase.getReference().child("Events");
+        if(event.getImages().isEmpty()){
+            StorageReference storageRef = mStorage.getReference().child("EventImages/"+event.getImageName());
+            DatabaseReference mRef  = mDatabase.getReference().child("Events");
+            Query query = mRef.orderByKey().equalTo(event.getName());
 
-        Query query = mRef.orderByKey().equalTo(event.getName());
+            storageRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void unused) {
 
-        storageRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void unused) {
-                Log.d("MyEvent","Delete storage succssful");
-                query.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for (DataSnapshot eventSnapshot: snapshot.getChildren()) {
-                            eventSnapshot.getRef().removeValue();
-                            HomeRepo.eventList.remove(event);
+                    query.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for (DataSnapshot eventSnapshot: snapshot.getChildren()) {
 
+                                eventSnapshot.getRef().removeValue();
+                                HomeRepo.eventList.remove(event);
+
+
+
+                                eventSnapshot.getRef().removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if(task.isSuccessful()){
+
+                                        }
+                                    }
+                                });
+
+
+                            }
                         }
 
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                }
+
+
+            });
+        }else{
+            StorageReference storageRef = mStorage.getReference().child("EventImages/"+event.getName());
+            DatabaseReference mRef  = mDatabase.getReference().child("Events");
+            Query query = mRef.orderByKey().equalTo(event.getName());
+            storageRef.listAll().addOnSuccessListener(new OnSuccessListener<ListResult>() {
+                @Override
+                public void onSuccess(ListResult listResult) {
+                    for (int i = 0; i < listResult.getItems().size(); i++) {
+                        if(i+1==listResult.getItems().size()){
+                            listResult.getItems().get(i).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    query.addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            for (DataSnapshot eventSnapshot: snapshot.getChildren()) {
+                                                eventSnapshot.getRef().removeValue();
+                                                HomeRepo.eventList.remove(event);
+
+
+                                                eventSnapshot.getRef().removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                        if(task.isSuccessful()){
+
+                                                        }
+                                                    }
+                                                });
+
+
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
+                                }
+                            });
+                        }else{
+                            listResult.getItems().get(i).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+
+                                }
+                            });
+                        }
                     }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-            }
-
-
-        });
-
-
-
+                }
+            });
+        }
 
 
     }
@@ -489,7 +517,6 @@ public class SettingsActivity extends AppCompatActivity {
         storageRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
-                Log.d("UserDelete","Delete storage succssful");
                 query.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -521,7 +548,6 @@ public class SettingsActivity extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        Log.d("Settings","user delete");
 
 
                     }

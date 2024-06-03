@@ -12,7 +12,6 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +33,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.ListResult;
 import com.google.firebase.storage.StorageReference;
 import com.saadahmedev.popupdialog.PopupDialog;
 import com.saadahmedev.popupdialog.listener.StandardDialogActionListener;
@@ -49,8 +49,9 @@ public class MyEventFragment extends Fragment implements MyEventAdapter.MyEventI
     private NavController navController;
     private EventRepo eventRepo = new EventRepo();
     private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
+
     public MyEventFragment() {
-        // Required empty public constructor
+
     }
 
 
@@ -85,7 +86,6 @@ public class MyEventFragment extends Fragment implements MyEventAdapter.MyEventI
 
             @Override
             public void onChanged(List<Event> events) {
-                Log.d("TAG","change"+events+" ");
                 eventAdapter.submitList(events);
 
             }
@@ -94,51 +94,107 @@ public class MyEventFragment extends Fragment implements MyEventAdapter.MyEventI
 
     }
     private void deleteFromDatabase(Event event){
-        StorageReference storageRef = mStorage.getReference().child("EventImages/"+event.getImageName());
-        DatabaseReference mRef  = mDatabase.getReference().child("Events");
-        Query query = mRef.orderByKey().equalTo(event.getName());
 
-        storageRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void unused) {
-                Log.d("MyEvent","Delete storage succssful");
-                query.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for (DataSnapshot eventSnapshot: snapshot.getChildren()) {
-                            Log.d("TAG",eventSnapshot.toString());
-                            HomeRepo.eventList.remove(event);
-                            eventRepo.deleteItemToMarks(event);
 
-                            Log.d("TAG","is event list"+HomeRepo.eventList);
+        if(event.getImages().isEmpty()){
+            StorageReference storageRef = mStorage.getReference().child("EventImages/"+event.getImageName());
+            DatabaseReference mRef  = mDatabase.getReference().child("Events");
+            Query query = mRef.orderByKey().equalTo(event.getName());
 
-                            eventSnapshot.getRef().removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if(task.isSuccessful()){
-                                        myEventBinding.loadingBarMyEvents.setVisibility(View.GONE);
+            storageRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void unused) {
+                    query.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for (DataSnapshot eventSnapshot: snapshot.getChildren()) {
 
-                                        dataObserve();
-                                        eventAdapter.notifyDataSetChanged();
+                                HomeRepo.eventList.remove(event);
+                                eventRepo.deleteItemToMarks(event);
+
+
+
+                                eventSnapshot.getRef().removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if(task.isSuccessful()){
+                                            myEventBinding.loadingBarMyEvents.setVisibility(View.GONE);
+
+                                            dataObserve();
+                                            eventAdapter.notifyDataSetChanged();
+                                        }
                                     }
-                                }
-                            });
+                                });
 
+
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
 
                         }
+                    });
+                }
+
+
+            });
+        }else{
+            StorageReference storageRef = mStorage.getReference().child("EventImages/"+event.getName());
+            DatabaseReference mRef  = mDatabase.getReference().child("Events");
+            Query query = mRef.orderByKey().equalTo(event.getName());
+            storageRef.listAll().addOnSuccessListener(new OnSuccessListener<ListResult>() {
+                @Override
+                public void onSuccess(ListResult listResult) {
+                    for (int i = 0; i < listResult.getItems().size(); i++) {
+                        if(i+1==listResult.getItems().size()){
+                            listResult.getItems().get(i).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    query.addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            for (DataSnapshot eventSnapshot: snapshot.getChildren()) {
+
+                                                HomeRepo.eventList.remove(event);
+                                                eventRepo.deleteItemToMarks(event);
+
+
+                                                eventSnapshot.getRef().removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                        if(task.isSuccessful()){
+                                                            myEventBinding.loadingBarMyEvents.setVisibility(View.GONE);
+
+                                                            dataObserve();
+                                                            eventAdapter.notifyDataSetChanged();
+                                                        }
+                                                    }
+                                                });
+
+
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
+                                }
+                            });
+                        }else{
+                            listResult.getItems().get(i).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+
+                                }
+                            });
+                        }
                     }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-            }
-
-
-        });
-
-
+                }
+            });
+        }
 
 
     }
@@ -195,10 +251,6 @@ public class MyEventFragment extends Fragment implements MyEventAdapter.MyEventI
         super.onStart();
         eventAdapter = new MyEventAdapter(this);
 
-        /*binding.homeRecycleView.addItemDecoration(new DividerItemDecoration(requireContext(),
-                DividerItemDecoration.VERTICAL));
-        binding.homeRecycleView.addItemDecoration(new DividerItemDecoration(requireContext(),
-                DividerItemDecoration.HORIZONTAL));*/
 
         dataObserve();
     }

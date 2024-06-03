@@ -1,6 +1,5 @@
 package com.example.cathelp.adapters;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -8,10 +7,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.cathelp.model.Event;
 import com.example.cathelp.databinding.EventsItemBinding;
-
-import java.util.ArrayList;
+import com.example.cathelp.model.Event;
 
 public class HomeAdapter extends ListAdapter<Event, HomeAdapter.HomeViewHolder> {
 

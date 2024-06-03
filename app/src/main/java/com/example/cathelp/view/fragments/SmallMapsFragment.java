@@ -25,7 +25,7 @@ public class SmallMapsFragment extends Fragment implements OnMapReadyCallback{
 
 
     public SmallMapsFragment() {
-        // Required empty public constructor
+
     }
 
 
@@ -40,29 +40,6 @@ public class SmallMapsFragment extends Fragment implements OnMapReadyCallback{
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        /*SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
-                .findFragmentById(R.id.google_map);
-
-
-        mapFragment.getMapAsync(new OnMapReadyCallback() {
-            @Override
-            public void onMapReady(@NonNull final GoogleMap googleMap) {
-                googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-                    @Override
-                    public void onMapClick(@NonNull LatLng latLng) {
-                        MarkerOptions markerOptions = new MarkerOptions();
-                        markerOptions.position(latLng);
-                        markerOptions.title(latLng.latitude+" : "+latLng.longitude);
-                        googleMap.clear();
-
-                        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
-                                latLng,10
-                        ));
-                        googleMap.addMarker(markerOptions);
-                    }
-                });
-            }
-        });*/
 
     }
     public static void setMapLocation(Fragment fragment, Event event){

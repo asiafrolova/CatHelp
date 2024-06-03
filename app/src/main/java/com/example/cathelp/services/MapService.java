@@ -96,62 +96,7 @@ public class MapService implements OnMapReadyCallback, GoogleMap.OnMapClickListe
                 }
             }
         }
-        /*for (Event event : events) {
-            for (LinkMark linkMark : listMutable) {
 
-                if(linkMark.getNameEvent().equals(event.getName())){
-
-                    googleMap.addMarker(new MarkerOptions().position(new LatLng(event.getLatitude(),event.getLongitude())).title(event.getName()))
-                            .setIcon(getIcon(context, R.drawable.map_pin));
-                }
-            }
-        }*/
-
-        /*ArrayList<Event> events = (ArrayList<Event>) homeRepo.getEvents().getValue();
-        List<Event> eventList = new ArrayList<>();
-        FirebaseDatabase.getInstance().getReference().child("Events").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                for(DataSnapshot eventSnapshot : snapshot.getChildren()){
-
-
-                    Log.d("homeRepo",eventSnapshot+" is snapshot.getChildren()");
-                    String eventName = eventSnapshot.child("eventName").getValue().toString();
-                    String eventDescription = eventSnapshot.child("description").getValue().toString();
-                    String stringPrice = eventSnapshot.child("price").getValue().toString();
-                    Double eventPrice = Double.parseDouble(stringPrice);
-                    String eventImage = eventSnapshot.child(AccountFragment.PATH_IMAGE).getValue().toString();
-                    String eventEid = eventSnapshot.child("eid").getValue().toString();
-                    String author  =eventSnapshot.child("author").getValue().toString();
-                    String imageName  =eventSnapshot.child("imageName").getValue().toString();
-                    String animalType  =eventSnapshot.child("animalType").getValue().toString();
-                    String address=eventSnapshot.child("address").getValue().toString();
-                    String connection = eventSnapshot.child("connection").getValue().toString();
-                    double latitude = Double.parseDouble(eventSnapshot.child("latitude").getValue().toString());
-                    double longitude = Double.parseDouble(eventSnapshot.child("longitude").getValue().toString());
-
-
-
-                    eventList.add(new Event(eventName,eventDescription,eventEid,author,eventImage,imageName,address,animalType,latitude,longitude,eventPrice,connection));
-
-                    for (LinkMark linkMark : listMutable) {
-                        if(linkMark.getNameEvent().equals(eventName)){
-
-                            googleMap.addMarker(new MarkerOptions().position(new LatLng(latitude,longitude)).title(eventName))
-                                    .setIcon(getIcon(context, R.drawable.map_pin));
-                        }
-                    }
-
-
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });*/
 
 
 
@@ -191,56 +136,7 @@ public class MapService implements OnMapReadyCallback, GoogleMap.OnMapClickListe
     }
 
 
-    /*public List<Event> linkToEvent(List<LinkMark> linkMarks){
-        if(linktEventMutable != null){
-            linktEventMutable.clear();
-        }
-        allEventsFromHome = homeRepo.getEvents();
-        for (Event event : allEventsFromHome.getValue()) {
-            for (LinkMark linkMark : linkMarks) {
-                if(event.getName().equals(linkMark.getNameEvent())){
-                    linktEventMutable.add(event);
-                }
-            }
 
-        }
-
-        return linktEventMutable;
-
-
-    }*/
-    /*public List<LinkMark> initMark() {
-
-        ExecutorService es = Executors.newSingleThreadExecutor();
-        Future<List<LinkMark>> result = es.submit(new Callable<List<LinkMark>>() {
-            @Override
-            public List<LinkMark> call() throws Exception {
-                listMutable = (ArrayList<LinkMark>) instance.marksDao().getAll();
-
-                while (true) {
-                    if (listMutable != null) {
-
-                        return listMutable;
-
-
-                    }
-                }
-
-
-            }
-        });
-
-        try {
-
-            return result.get();
-
-
-        } catch (ExecutionException e) {
-            throw new RuntimeException(e);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-    }*/
     public BitmapDescriptor getIcon(Context context, int drawableId){
         Drawable drawable = ActivityCompat.getDrawable(context,drawableId);
         drawable.setBounds(0,0,drawable.getIntrinsicWidth(),drawable.getIntrinsicHeight());

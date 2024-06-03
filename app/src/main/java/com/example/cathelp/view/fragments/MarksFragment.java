@@ -31,7 +31,7 @@ public class MarksFragment extends Fragment implements MarksAdapter.MarksInterfa
     private NavController navController;
 
     public MarksFragment() {
-        // Required empty public constructor
+
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -86,10 +86,6 @@ public class MarksFragment extends Fragment implements MarksAdapter.MarksInterfa
         super.onStart();
         marksAdapter = new MarksAdapter(this);
 
-        /*binding.homeRecycleView.addItemDecoration(new DividerItemDecoration(requireContext(),
-                DividerItemDecoration.VERTICAL));
-        binding.homeRecycleView.addItemDecoration(new DividerItemDecoration(requireContext(),
-                DividerItemDecoration.HORIZONTAL));*/
 
         dataObserve();
     }

@@ -4,7 +4,6 @@ import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.BindingAdapter;
-import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
