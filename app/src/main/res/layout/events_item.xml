@@ -98,7 +98,7 @@
                     app:layout_constraintTop_toTopOf="@id/view"
                     android:id="@+id/priceTextView"
                     tools:text="1200 ₽"
-                    android:text="@{event.price==0?`free`:String.valueOf(event.price)+`₽`}"
+                    android:text="@{event.price==0?`free`:(event.price>9999?String.valueOf(event.price).substring(0,4)+`₽`:String.valueOf(event.price)+`₽`)}"
                     android:textSize="18dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
